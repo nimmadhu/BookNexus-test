@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Request, Response ,NextFunction} from 'express';
 import jwt, { type SignOptions } from 'jsonwebtoken';
 import User from '../models/User.js';
 
@@ -97,5 +97,61 @@ export const getUserProfile = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+// Get all users (admin only)
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Only admins can access this endpoint
+    if (!req.user || req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Not authorized to access this resource' });
+    }
+    
+    // Use Sequelize's findAll method instead of MongoDB's find
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] } // Exclude password field
+    });
+    
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Delete a librarian
+// @route   DELETE /api/auth/librarians/:id
+// @access  Private/Admin
+export const deleteLibrarian = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Get ID from params
+    if (!req.params.id) {
+      return res.status(400).json({ message: 'Librarian ID is required' });
+    }
+    const librarianId = parseInt(req.params.id);
+    
+    // Prevent users from deleting themselves
+    if (req.user && req.user.id === librarianId) {
+      return res.status(400).json({ message: 'You cannot delete your own account' });
+    }
+    
+    // Find the librarian to delete
+    const librarian = await User.findByPk(librarianId);
+    
+    if (!librarian) {
+      return res.status(404).json({ message: 'Librarian not found' });
+    }
+    
+    // // Ensure user is actually an admin/librarian
+    // if (librarian.role !== 'admin') {
+    //   return res.status(400).json({ message: 'User is not a librarian' });
+    // }
+    
+    // Delete the librarian
+    await librarian.destroy();
+    
+    res.status(200).json({ message: 'Librarian deleted successfully' });
+  } catch (error) {
+    next(error);
   }
 };

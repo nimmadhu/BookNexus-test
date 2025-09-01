@@ -15,6 +15,9 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  static find(arg0: {}, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   public id!: number;
   public name!: string;
   public email!: string;

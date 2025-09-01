@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { AnimatePresence, motion } from 'framer-motion';
+import { UserGroupIcon } from '@heroicons/react/24/outline'; // Add this import
+
 import { 
   MoonIcon, 
   SunIcon, 
@@ -24,6 +26,11 @@ const Navbar: React.FC = () => {
     { name: 'Home', path: '/' },
     { name: 'Books', path: '/books' },
     { name: 'Search', path: '/search' },
+      {
+    name: 'Librarians',
+    path: '/admin/librarians',
+    icon: UserGroupIcon
+  }
   ];
 
   const adminNavigation = [

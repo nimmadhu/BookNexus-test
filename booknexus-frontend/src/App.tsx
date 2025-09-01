@@ -18,6 +18,8 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminBooksPage from './pages/AdminBooksPage';
 import BookFormPage from './pages/BookFormPage';
 import NotFoundPage from './pages/NotFoundPage';
+import LibrarianManagementPage from './pages/LibrarianManagementPage';
+
 
 // Create a query client
 const queryClient = new QueryClient({
@@ -52,6 +54,11 @@ const App: React.FC = () => {
               } />
               
               {/* Admin routes */}
+              <Route path="/admin/librarians" element={
+                <AdminRoute>
+                  <LibrarianManagementPage />
+                </AdminRoute>
+              } />
               <Route path="/admin/dashboard" element={
                 <AdminRoute>
                   <AdminDashboardPage />

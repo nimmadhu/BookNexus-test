@@ -58,7 +58,7 @@ const LibrarianManagementPage: React.FC = () => {
       name,
       email,
       password,
-      role: 'admin' // All librarians are admins
+      role: 'admin' // This ensures the role is set to admin
     });
   };
 

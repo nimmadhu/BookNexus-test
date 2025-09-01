@@ -17,6 +17,7 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
+  role?: string; // Adding optional role property
 }
 
 export interface AuthState {

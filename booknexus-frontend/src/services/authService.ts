@@ -1,5 +1,5 @@
 import api from './api';
-import type { LoginCredentials, RegisterData, User ,LibrarianData} from '../types/auth';
+import type { LoginCredentials, RegisterData, User } from '../types/auth';
 
 export const login = async (credentials: LoginCredentials): Promise<User> => {
   const response = await api.post('/auth/login', credentials);
@@ -22,14 +22,17 @@ export const register = async (userData: RegisterData): Promise<User> => {
 };
 
 // Used only by admins to register new librarians
-export const registerLibrarian = async (data: LibrarianData): Promise<User> => {
-  const response = await api.post('/auth/register-librarian', data);
-  return response.data.user;
+export const registerLibrarian = async (userData: RegisterData) => {
+  // Ensure the role is set to admin
+  const librarianData = { ...userData, role: 'admin' };
+  
+  const response = await api.post('/auth/register', librarianData);
+  return response.data;
 };
 
 export const getLibrarians = async (): Promise<User[]> => {
-  const response = await api.get('/auth/librarians');
-  return response.data.librarians;
+  const response = await api.get('/auth/users');
+  return response.data;
 };
 
 export const deleteLibrarian = async (id: number): Promise<void> => {

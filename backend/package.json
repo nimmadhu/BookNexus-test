@@ -1,0 +1,61 @@
+{
+  "name": "zupun-backend-starter",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "nodemon --watch src --ext ts,json --exec \"node --loader ts-node/esm src/index.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supundulara/zupun-backend-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supundulara/zupun-backend-starter/issues"
+  },
+  "homepage": "https://github.com/supundulara/zupun-backend-starter#readme",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.16.0",
+    "@google/generative-ai": "^0.24.1",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^8.0.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.3",
+    "@types/express-session": "^1.18.2",
+    "@types/express-validator": "^2.20.33",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.3.0",
+    "@types/sequelize": "^4.28.20",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}

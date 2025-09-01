@@ -34,12 +34,55 @@ const Navbar: React.FC = () => {
   ];
 
   const adminNavigation = [
-    { name: 'Dashboard', path: '/admin/dashboard' },
+    // { name: 'Dashboard', path: '/admin/dashboard' },
     { name: 'Manage Books', path: '/admin/books' },
   ];
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const toggleProfileMenu = () => setProfileMenuOpen(!profileMenuOpen);
+
+  // Animated Logo Component
+  const AnimatedLogo = () => (
+    <motion.div
+      animate={{
+        color: ['#059669', '#065f46', '#1f2937', '#374151', '#059669']
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: 'easeInOut'
+      }}
+      className="flex items-center"
+    >
+      <motion.div
+        animate={{
+          color: ['#10b981', '#047857', '#111827', '#4b5563', '#10b981']
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      >
+        <BookOpenIcon className="h-8 w-8" />
+      </motion.div>
+      <motion.span 
+        className="ml-2 text-xl font-bold"
+        animate={{
+          color: theme === 'dark' 
+            ? ['#10b981', '#047857', '#ffffff', '#d1d5db', '#10b981']
+            : ['#059669', '#065f46', '#1f2937', '#374151', '#059669']
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      >
+        BookNexus
+      </motion.span>
+    </motion.div>
+  );
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-sm">
@@ -48,8 +91,7 @@ const Navbar: React.FC = () => {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center">
-                <BookOpenIcon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
-                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">BookNexus</span>
+                <AnimatedLogo />
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -90,7 +132,7 @@ const Navbar: React.FC = () => {
           <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
             >
               {theme === 'dark' ? (
                 <SunIcon className="h-5 w-5" />
